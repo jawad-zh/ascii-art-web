@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
+
 	"asciiArt/functions"
 )
 
@@ -29,7 +30,6 @@ func handleAscii(w http.ResponseWriter, r *http.Request) {
 	}
 	asciiMap := functions.ReadAsciiBanner("standard.txt")
 	result := functions.AsciiRepresentation(text, asciiMap)
-	fmt.Println(result)
 	tmp1.Execute(w, result)
 }
 
