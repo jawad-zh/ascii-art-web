@@ -8,7 +8,7 @@ import (
 )
 
 func handleHome(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "static/index.html") // عرض index.html
+	http.ServeFile(w, r, "static/index.html")
 }
 
 func handleAscii(w http.ResponseWriter, r *http.Request) {
