@@ -1,16 +1,21 @@
 package functions
 
 import (
+	"errors"
 	"fmt"
 	"os"
 	"strings"
 )
 
-func ReadAsciiBanner(filname string) map[rune][]string {
+func ReadAsciiBanner(filname string) (map[rune][]string, error) {
 	file, err := os.ReadFile(filname)
+	if len(file) == 0 {
+		fmt.Println("Error when in Banner file!")
+		return nil, errors.New("error in Banner file")
+	}
 	if err != nil {
 		fmt.Println("Error when opening the file!")
-		return nil
+		return nil, err
 	}
 	str := string(file)
 	input := strings.Split(str, "\n\n")
@@ -24,5 +29,5 @@ func ReadAsciiBanner(filname string) map[rune][]string {
 		asciiMap[rune(char)] = strings.Split(value, "\n")
 		char++
 	}
-	return asciiMap
+	return asciiMap, nil
 }
