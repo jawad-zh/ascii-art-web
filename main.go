@@ -24,17 +24,17 @@ func handleAscii(w http.ResponseWriter, r *http.Request) {
 	}
 	Banner := r.FormValue("select")
 	asciiMap, err := functions.ReadAsciiBanner(Banner)
-	if err != nil {
-		t:=fmt.Sprint(err)
-		http.Error(w, t, http.StatusAlreadyReported)
-		fmt.Print("ther is no data")
-		return
-	}
-	if len(asciiMap) == 0 {
-		http.Error(w, "err", http.StatusAlreadyReported)
-		fmt.Print("ther is no data")
-		return
-	}
+	// if err != nil {
+	// 	t:=fmt.Sprint(err)
+	// 	http.Error(w, t, http.StatusAlreadyReported)
+	// 	fmt.Print("ther is no data")
+	// 	return
+	// }
+	// if len(asciiMap) == 0 {
+	// 	http.Error(w, "err", http.StatusAlreadyReported)
+	// 	fmt.Print("ther is no data")
+	// 	return
+	// }
 	result := functions.AsciiRepresentation(text, asciiMap)
 	tmp1.Execute(w, map[string]string{"Result": result})
 }

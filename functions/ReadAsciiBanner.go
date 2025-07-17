@@ -10,7 +10,7 @@ import (
 func ReadAsciiBanner(filname string) (map[rune][]string, error) {
 	file, err := os.ReadFile(filname)
 	if len(file) == 0 {
-		fmt.Println("Error when in Banner file!")
+		fmt.Println("Error in Banner file!")
 		return nil, errors.New("error in Banner file")
 	}
 	if err != nil {
