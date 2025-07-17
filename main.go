@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
-
 	"asciiArt/functions"
 )
 
@@ -17,20 +16,15 @@ func handleAscii(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Only POST is allowed", http.StatusMethodNotAllowed)
 		return
 	}
-
 	text := r.FormValue("text")
-
-	if len(text) == 0 {
-		fmt.Fprint(w, "Empty input")
-		return
-	}
 	tmp1, err := template.ParseFiles("static/index.html")
 	if err != nil {
 		return
 	}
-	asciiMap := functions.ReadAsciiBanner("standard.txt")
+	Banner:=r.FormValue("select")
+	asciiMap := functions.ReadAsciiBanner(Banner)
 	result := functions.AsciiRepresentation(text, asciiMap)
-	tmp1.Execute(w, result)
+	tmp1.Execute(w, map[string]string{"Result": result} )
 }
 
 func main() {

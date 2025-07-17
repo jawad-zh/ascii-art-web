@@ -9,9 +9,10 @@ func AsciiRepresentation(str string, asciiMap map[rune][]string) string {
 	stro := ""
 	words := strings.Split(str, "\\n")
 	fmt.Println(words)
-	if words[0] == "" {
+	if words[0] == "" && !Emptycheck(words){
 		words = words[1:]
 	}
+	fmt.Print(words)
 	slice := [][]string{}
 	for _, word := range words {
 		for _, char := range word {
@@ -26,7 +27,14 @@ func AsciiRepresentation(str string, asciiMap map[rune][]string) string {
 	}
 	return stro
 }
-
+func Emptycheck(str []string)bool{
+	for _,r:= range str{
+		if r!="" {
+			return true
+		}
+	}
+	return false
+}
 func Print(slice [][]string) string {
 	str := ""
 	for i := 0; i <= 7; i++ {
