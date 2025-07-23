@@ -1,20 +1,20 @@
 package functions
 
 import (
-	"fmt"
 	"strings"
 )
 
+// Generate ASCII art from input string
 func AsciiRepresentation(str string, asciiMap map[rune][]string) string {
-	stro := ""
-	words := strings.Split(str, "\\n")
-	fmt.Println(words)
-	if words[0] == "" && !Emptycheck(words){
-		words = words[1:]
-	}
-	fmt.Print(words)
+	result := ""
+	words := strings.Split(str, "\r\n")
 	slice := [][]string{}
+
 	for _, word := range words {
+		if len(word) == 0 {
+			result += "\n"
+			continue
+		}
 		for _, char := range word {
 			for key, value := range asciiMap {
 				if char == key {
@@ -22,31 +22,16 @@ func AsciiRepresentation(str string, asciiMap map[rune][]string) string {
 				}
 			}
 		}
-		stro += Print(slice)
+
+		for i := 0; i < 8; i++ {
+			for _, line := range slice {
+				result += line[i]
+			}
+			result += "\n"
+		}
+
 		slice = nil
 	}
-	return stro
-}
-func Emptycheck(str []string)bool{
-	for _,r:= range str{
-		if r!="" {
-			return true
-		}
-	}
-	return false
-}
-func Print(slice [][]string) string {
-	str := ""
-	for i := 0; i <= 7; i++ {
-		lineSlice := []string{}
-		for _, char := range slice {
-			lineSlice = append(lineSlice, char[i])
-		}
-		strPrint := strings.Join(lineSlice, " ")
-		
-			str += "\n"
-		
-		str += strPrint
-	}
-	return str
+
+	return result
 }
